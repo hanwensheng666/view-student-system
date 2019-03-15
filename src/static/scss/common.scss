@@ -1,0 +1,47 @@
+body {
+  font-family: 'Chinese Quote', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol';
+  width: 100%;
+  min-width: 1020px;
+  margin: 0 auto !important;
+  position: relative;
+}
+
+.space-height-10px {
+  height: 10px;
+  display: block;
+}
+.modal_body--open {
+  // overflow: hidden;
+  position: fixed;
+  width: 100%;
+  // height: 100%;
+}
+.filter-blur-1px {
+  filter: blur(1px);
+}
+// *[aria-disabled="true"] {
+//   background: #CCC;
+//   color: white;
+//   opacity: 1!important;
+//   border: none;
+//   &::before {
+//     border: #CCC !important;
+//   }
+// }
+
+// 定义 placeholder 颜色
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #ccc;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: #ccc;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: #ccc;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: #ccc;
+}

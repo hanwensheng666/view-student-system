@@ -11,21 +11,33 @@ export default class Side extends Component {
 			<Sider>
 				<Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" style={{marginTop:"20px"}}>
 					<Menu.Item key="1">
-						<Link to="/componentManagement">
+						<Link to="/overview">
 							<Icon type="pie-chart" />
-							<span>组件管理</span>
+							<span>活动概览</span>
 						</Link>
 					</Menu.Item>
 					<Menu.Item key="2">
-						<Link to="/channelManagement">
+						<Link to="/signup">
 							<Icon type="appstore-o" />
-							<span>渠道管理</span>
+							<span>活动报名</span>
 						</Link>
 					</Menu.Item>
-					<Menu.Item key="9">
-						<Link to="/pageManagement">
+          <Menu.Item key="3">
+						<Link to="/competition">
 							<Icon type="database" />
-							<span>页面管理</span>
+							<span>排名积分</span>
+						</Link>
+					</Menu.Item>
+					<Menu.Item key="4">
+						<Link to="/act-manage">
+							<Icon type="database" />
+							<span>活动管理</span>
+						</Link>
+					</Menu.Item>
+          <Menu.Item key="5">
+						<Link to="/mine">
+							<Icon type="database" />
+							<span>个人中心</span>
 						</Link>
 					</Menu.Item>
 				</Menu>
