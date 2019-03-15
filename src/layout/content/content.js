@@ -5,8 +5,7 @@ import { Route,Switch } from 'react-router-dom'
 import ComponentManagement from '../../containers/ComponentManagement/ComponentManagement.jsx'
 import ChannelManagement from '../../containers/ChannelManagement/ChannelManagement.jsx'
 import PageManagement from '../../containers/PageManagement/PageManagement.jsx'
-import Login from '../../containers/Login/Login.jsx'
-import Regist from '../../containers/regist/regist.jsx'
+
 
 
 
@@ -19,8 +18,6 @@ class MyPage extends Component {
 			<Switch>
 				<Route path="/channelManagement" component={ChannelManagement} />
 				<Route path="/pageManagement" component={PageManagement} />
-				<Route path="/login" component={Login} />
-				<Route path="/regist" component={Regist} />
 				<Route path="/componentManagement" component={ComponentManagement} />
 			</Switch>
 	  </Content> 
