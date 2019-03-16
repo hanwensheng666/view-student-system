@@ -14,7 +14,8 @@ export default function (state=initialState,action) {
         ...state,
         token:action.payload.token,
         isLogin:true,
-        userInfo:action.payload.userInfo
+        userInfo:action.payload.userInfo,
+        identity:action.payload.identity
       }
     }
     case LOGOUT: {

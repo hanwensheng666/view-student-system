@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { Button, Row, Col } from 'antd';
 import {connect} from 'react-redux'
 import {logoutAction} from '@/store/actions/auth'
+import {withRouter} from 'react-router-dom'
 // import logo from '@/static/images/logo.png'
 // import logo2x from '@/static/images/logo@2x.png'
 import './header.css';
@@ -10,7 +11,7 @@ import './header.css';
 class Header extends Component {
   logout(){
     this.props.logoutAction()
-    // this.props.history.push('/login')
+    this.props.history.push('/login')
   }
   render() {
     const {userInfo} = this.props.auth
@@ -37,4 +38,4 @@ class Header extends Component {
 const mapStateToProps = state => ({
   auth:state.auth
 })
-export default connect(mapStateToProps,{logoutAction})(Header);
+export default connect(mapStateToProps,{logoutAction})(withRouter(Header));

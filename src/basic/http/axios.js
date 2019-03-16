@@ -9,11 +9,6 @@ import qs from 'query-string';
  */
 axios.interceptors.request.use(
   config => {
-    let reqData = {};
-    try {
-      reqData =
-        typeof config.data === 'string' ? JSON.parse(config.data) : config.data;
-    } catch (e) {}
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     config.data = qs.stringify(config.data);
     return config;

@@ -22,7 +22,8 @@ class Login extends React.Component {
     if(res && res.code === 0){
       this.props.loginAction({
         token:res.results.token,
-        userInfo:res.results
+        userInfo:res.results,
+        identity:res.results.identity
       })
       notification.open({
         message:res.msg,
