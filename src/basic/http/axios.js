@@ -1,8 +1,8 @@
-import React from 'react';
 import axios from 'axios';
 import qs from 'query-string';
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
+// axios.withCredentials = true;
 
 /**
  * http request 拦截器

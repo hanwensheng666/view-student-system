@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 
 import { Button, Row, Col } from 'antd';
 import {connect} from 'react-redux'
+import {logoutAction} from '@/store/actions/auth'
 // import logo from '@/static/images/logo.png'
 // import logo2x from '@/static/images/logo@2x.png'
 import './header.css';
 
 class Header extends Component {
+  logout(){
+    this.props.logoutAction()
+    // this.props.history.push('/login')
+  }
   render() {
     const {userInfo} = this.props.auth
     return (
@@ -21,7 +26,7 @@ class Header extends Component {
           </Col>
           <Col span={4} className="login_info">
             <span>欢迎您，<span>{userInfo.name}</span></span>
-            <Button>退出</Button>
+            <Button onClick={this.logout.bind(this)}>退出</Button>
           </Col>
         </Row>
       </header>
@@ -32,4 +37,4 @@ class Header extends Component {
 const mapStateToProps = state => ({
   auth:state.auth
 })
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps,{logoutAction})(Header);
