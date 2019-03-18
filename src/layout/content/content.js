@@ -2,16 +2,34 @@ import React, { Component } from 'react'
 import { Layout } from 'antd';
 import { Route,Switch } from 'react-router-dom'
 import PrivateRoute from '@/components/common/PrivateRoute'
-import Mine from '@/containers/Mine/Mine'
-import Overview from '@/containers/Overview/Overview'
-import Competition from '@/containers/Competition/Competition'
-import ActManage from '@/containers/ActManage/ActManage'
-import Signup from '@/containers/Signup/Signup'
 import { IDENTITY } from '@/basic/config/identity'
-
+import Loadable from 'react-loadable';
+import PageHolder from '@/components/common/PageHolder'
 
 
 const { Content } = Layout;
+
+const Overview = Loadable({
+  loader: () => import('@/containers/Overview/Overview'),
+  loading: PageHolder
+});
+const Signup = Loadable({
+  loader: () => import('@/containers/Signup/Signup'),
+  loading: PageHolder
+});
+const ActManage = Loadable({
+  loader: () => import('@/containers/ActManage/ActManage'),
+  loading: PageHolder
+});
+const Mine = Loadable({
+  loader: () => import('@/containers/Mine/Mine'),
+  loading: PageHolder
+});
+const Competition = Loadable({
+  loader: () => import('@/containers/Competition/Competition'),
+  loading: PageHolder
+});
+
 
 class MyPage extends Component {
   render() {
