@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-    <!--
+
+<head>
+  <meta charset="utf-8">
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="theme-color" content="#000000">
+  <!--
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <!--
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+  <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
       Only files inside the `public` folder can be referenced from the HTML.
@@ -19,14 +20,90 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>太原师范学院计算机系活动管理系统</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root" style='min-width:1020px;'></div>
-    <!--
+  <title>太原师范学院计算机系活动管理系统</title>
+  <style type="text/css">
+    @keyframes lds-cube {
+      0% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+      }
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+    @-webkit-keyframes lds-cube {
+      0% {
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+      }
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
+    }
+    .lds-cube {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      margin: -80px 0px 0px -40px;
+    }
+    .lds-cube div {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      top: 10px;
+      left: 10px;
+      background: #93dbe9;
+      -webkit-animation: lds-cube 1.5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+      animation: lds-cube 1.5s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+      -webkit-animation-delay: -0.45s;
+      animation-delay: -0.45s;
+    }
+    .lds-cube div:nth-child(2) {
+      top: 10px;
+      left: 110px;
+      background: #689cc5;
+      -webkit-animation-delay: -0.3s;
+      animation-delay: -0.3s;
+    }
+    .lds-cube div:nth-child(3) {
+      top: 110px;
+      left: 110px;
+      background: #3b4368;
+      -webkit-animation-delay: 0s;
+      animation-delay: 0s;
+    }
+    .lds-cube div:nth-child(4) {
+      top: 110px;
+      left: 10px;
+      background: #5e6fa3;
+      -webkit-animation-delay: -0.15s;
+      animation-delay: -0.15s;
+    }
+    .lds-cube {
+      width: 133px !important;
+      height: 133px !important;
+      -webkit-transform: translate(-66.5px, -66.5px) scale(0.665) translate(66.5px, 66.5px);
+      transform: translate(-66.5px, -66.5px) scale(0.665) translate(66.5px, 66.5px);
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    You need to enable JavaScript to run this app.
+  </noscript>
+  <div id="root" style='min-width:1020px;'>
+    <div class="lds-css ng-scope">
+      <div style="width:100%;height:100%" class="lds-cube">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -36,5 +113,6 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-  </body>
+</body>
+
 </html>

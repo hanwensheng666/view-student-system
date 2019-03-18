@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { Layout, Menu, Icon } from 'antd';
 const { Sider } = Layout;
-
+const SubMenu  = Menu.SubMenu ;
 export default class Side extends Component {
     render() {
         return (
@@ -28,12 +28,20 @@ export default class Side extends Component {
 							<span>排名积分</span>
 						</Link>
 					</Menu.Item>
-					<Menu.Item key="4">
-						<Link to="/act-manage">
-							<Icon type="database" />
-							<span>活动管理</span>
-						</Link>
-					</Menu.Item>
+          <SubMenu  key="4" title={<span><Icon type="appstore" /><span>活动管理</span></span>}>
+            <Menu.Item key="4-1">
+              <Link to="/act-manage/create-act">
+                <Icon type="database" />
+                <span>创建活动</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="4-2">
+              <Link to="/act-manage/modify-act">
+                <Icon type="database" />
+                <span>修改活动</span>
+              </Link>
+            </Menu.Item>
+          </SubMenu>   
           <Menu.Item key="5">
 						<Link to="/mine">
 							<Icon type="database" />
