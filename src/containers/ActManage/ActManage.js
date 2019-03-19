@@ -1,6 +1,7 @@
 import {
   Form,Icon, Input, DatePicker, TimePicker, Button,Row,Col,Checkbox,Cascader,Select
 } from 'antd';
+
 import React, { Component } from 'react'
 import {getAllClassByGrade} from '@/api/class'
 
@@ -8,11 +9,11 @@ import {getAllClassByGrade} from '@/api/class'
 import './ActManage.scss'
 
 
-const Option = Select.Option;
 
 
 class ActManage extends Component{
   state = {
+    value:'',
     options:[{
       value: '2016',
       label: '2016',
@@ -65,18 +66,14 @@ class ActManage extends Component{
       });
     }
   }
-  DatePick(date,dateString){
-    console.log(date,dateString)
-  }
-  pickStu = (value, selectedOptions) => {
-    console.log(value, selectedOptions);
-  }
-  handleChange(){
-  
+  handleChange(value){
+    this.setState({
+      value
+    })
   }
   
   render() {
-    const { getFieldDecorator } = this.props.form;
+    const Option = Select.Option;
     return (
       <div className="manage">
         <Row>
@@ -89,51 +86,20 @@ class ActManage extends Component{
         </Row>
         <Row>
           <Col span={8} offset={8}>
-            <Form onSubmit={this.handleSubmit} className="login-form">
-              
-              <Select defaultValue="lucy" style={{ width: 120 }} loading>
-                <Option value="lucy">Lucy</Option>
-              </Select>
-              
-              <Select
-                className="select_way"
-                defaultValue={'请选择'}
-                onChange={this.handleChange.bind(this)}>
-                {
-                  this.clubNames.length > 0 && clubNames.map((item,index)=>{
-                  
-                  })
-                }
-                <Option value="请选择">请选择</Option>
-              </Select>
-              
-              
-              
-             {/* <Form.Item>
-                {getFieldDecorator('userName', {
-                  rules: [{ required: true, message: '请设置社团名称' }],
-                })(
-                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="社团名称" />
-                )}
-              </Form.Item>
-              <Form.Item>
-                <DatePicker onChange={this.DatePick.bind(this)} placeholder="请选择社团成立时间" />
-              </Form.Item>
-              <Form.Item>
-                <Cascader
-                  options={this.state.options}
-                  loadData={this.loadData}
-                  onChange={this.pickStu}
-                  changeOnSelect
-                />
-              </Form.Item>*/}
-            </Form>
+            <Select
+              className="select_way"
+              defaultValue={'请选择'}
+              onChange={this.handleChange.bind(this)}
+              >
+              <Option value="请选择">444</Option>
+              <Option value="请选择">5255</Option>
+              <Option value="请选择">5255</Option>
+            </Select>
           </Col>
         </Row>
       </div>
     );
   }
 }
-const WrappedActManageForm = Form.create({ name: 'time_related_controls' })(ActManage);
 
-export default WrappedActManageForm;
+export default ActManage;
