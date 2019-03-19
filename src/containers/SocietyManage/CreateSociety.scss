@@ -5,15 +5,10 @@
     position: relative;
     font-size: 30px;
     font-weight: 500;
-    text-align: right;
-    &::after{
-      width: 150px;
-      position: absolute;
-      bottom: 5px;
-      right: -160px;
+    &__desc{
       text-align: left;
-      content: '(仅教师可操作)';
       font-size: 15px;
+      padding-left: 10px;
     }
   }
 }
