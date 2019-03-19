@@ -1,0 +1,19 @@
+.society-manage{
+  width: 100%;
+  margin: 100px auto;
+  &__title{
+    position: relative;
+    font-size: 30px;
+    font-weight: 500;
+    text-align: right;
+    &::after{
+      width: 150px;
+      position: absolute;
+      bottom: 5px;
+      right: -160px;
+      text-align: left;
+      content: '(仅教师可操作)';
+      font-size: 15px;
+    }
+  }
+}
