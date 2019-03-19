@@ -1,115 +1,107 @@
 import {
-  Form, DatePicker, TimePicker, Button,Row,Col
+  Form,Icon, Input, DatePicker, TimePicker, Button,Row,Col,Checkbox,Cascader 
 } from 'antd';
 import React, { Component } from 'react'
 import './CreateSociety.scss'
-const { MonthPicker, RangePicker } = DatePicker;
+import {getAllClassByGrade} from '@/api/class'
+const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 
 class CreateSociety extends Component {
+  state = {
+    options:[{
+      value: '2016',
+      label: '2016',
+      isLeaf: false,
+    }, {
+      value: '2015',
+      label: '2015',
+      isLeaf: false,
+    }, {
+      value: '2014',
+      label: '2014',
+      isLeaf: false,
+    }, {
+      value: '2013',
+      label: '2013',
+      isLeaf: false,
+    }]
+  }
+  componentWillMount(){
+
+  }
   handleSubmit = (e) => {
     e.preventDefault();
-
-    this.props.form.validateFields((err, fieldsValue) => {
-      if (err) {
-        return;
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
       }
-
-      // Should format date value before submit.
-      const rangeValue = fieldsValue['range-picker'];
-      const rangeTimeValue = fieldsValue['range-time-picker'];
-      const values = {
-        ...fieldsValue,
-        'date-picker': fieldsValue['date-picker'].format('YYYY-MM-DD'),
-        'date-time-picker': fieldsValue['date-time-picker'].format('YYYY-MM-DD HH:mm:ss'),
-        'month-picker': fieldsValue['month-picker'].format('YYYY-MM'),
-        'range-picker': [rangeValue[0].format('YYYY-MM-DD'), rangeValue[1].format('YYYY-MM-DD')],
-        'range-time-picker': [
-          rangeTimeValue[0].format('YYYY-MM-DD HH:mm:ss'),
-          rangeTimeValue[1].format('YYYY-MM-DD HH:mm:ss'),
-        ],
-        'time-picker': fieldsValue['time-picker'].format('HH:mm:ss'),
-      };
-      console.log('Received values of form: ', values);
     });
   }
-
+  async getAllClassByGrade(grade){
+    let res = await getAllClassByGrade(grade)
+    return res.results
+  }
+  loadData = async (selectedOptions) => {
+    const targetOption = selectedOptions[selectedOptions.length - 1];
+    let stuList =  await this.getAllClassByGrade(selectedOptions[0].value)
+    targetOption.loading = true;
+    if(stuList){
+      console.log(stuList)
+      targetOption.loading = false;
+      targetOption.children = stuList.map(item=>{
+        return {
+          label: item.classNo,
+          value: item._id,
+          isLeaf: false
+        }
+      });
+      this.setState({
+        options: [...this.state.options],
+      });
+    }
+  }
+  DatePick(date,dateString){
+    console.log(date,dateString)
+  }
+  pickStu = (value, selectedOptions) => {
+    console.log(value, selectedOptions);
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-    };
-    const config = {
-      rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-    };
-    const rangeConfig = {
-      rules: [{ type: 'array', required: true, message: 'Please select time!' }],
-    };
     return (
       <div className="society-manage">
         <Row>
-          <Col span={8}>
-            <h3 className="society-manage__title">创建社团</h3>
+          <Col span={8} offset={8}>
+            <h3 className="society-manage__title">
+              创建社团
+              <span className="society-manage__title__desc">(仅限教师操作)</span>
+            </h3>
           </Col>
         </Row>
-        <Form {...formItemLayout} onSubmit={this.handleSubmit}>
-          <Form.Item
-            label="DatePicker"
-          >
-            {getFieldDecorator('date-picker', config)(
-              <DatePicker />
-            )}
-          </Form.Item>
-          <Form.Item
-            label="DatePicker[showTime]"
-          >
-            {getFieldDecorator('date-time-picker', config)(
-              <DatePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-            )}
-          </Form.Item>
-          <Form.Item
-            label="MonthPicker"
-          >
-            {getFieldDecorator('month-picker', config)(
-              <MonthPicker />
-            )}
-          </Form.Item>
-          <Form.Item
-            label="RangePicker"
-          >
-            {getFieldDecorator('range-picker', rangeConfig)(
-              <RangePicker />
-            )}
-          </Form.Item>
-          <Form.Item
-            label="RangePicker[showTime]"
-          >
-            {getFieldDecorator('range-time-picker', rangeConfig)(
-              <RangePicker showTime format="YYYY-MM-DD HH:mm:ss" />
-            )}
-          </Form.Item>
-          <Form.Item
-            label="TimePicker"
-          >
-            {getFieldDecorator('time-picker', config)(
-              <TimePicker />
-            )}
-          </Form.Item>
-          <Form.Item
-            wrapperCol={{
-              xs: { span: 24, offset: 0 },
-              sm: { span: 16, offset: 8 },
-            }}
-          >
-            <Button type="primary" htmlType="submit">Submit</Button>
-          </Form.Item>
-        </Form>
+        <Row>
+          <Col span={8} offset={8}>
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              <Form.Item>
+                {getFieldDecorator('userName', {
+                  rules: [{ required: true, message: '请设置社团名称' }],
+                })(
+                  <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="社团名称" />
+                )}
+              </Form.Item>
+              <Form.Item>
+                <DatePicker onChange={this.DatePick.bind(this)} placeholder="请选择社团成立时间" />
+              </Form.Item>
+              <Form.Item>
+                <Cascader
+                  options={this.state.options}
+                  loadData={this.loadData}
+                  onChange={this.pickStu}
+                  changeOnSelect
+                />
+              </Form.Item>
+            </Form>
+          </Col>
+        </Row>
       </div>
     );
   }
