@@ -29,9 +29,12 @@ const Competition = Loadable({
   loader: () => import('@/containers/Competition/Competition'),
   loading: PageHolder
 });
+const CreateSociety = Loadable({
+  loader: () => import('@/containers/SocietyManage/CreateSociety'),
+  loading: PageHolder
+});
 
-
-class MyPage extends Component {
+class Containers extends Component {
   render() {
 	return (
 		<Content style={{ margin: '0 16px' }}>
@@ -40,6 +43,7 @@ class MyPage extends Component {
 				<Route path="/signup" component={Signup} />
 				<Route path="/competition" component={Competition} />
         <PrivateRoute verifiy={IDENTITY.MANAGER}  path='/act-manage'  component={ActManage} />
+        <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={CreateSociety} />
         <Route path='/mine'  component={Mine}></Route>
 			</Switch>
 	  </Content> 
@@ -48,4 +52,4 @@ class MyPage extends Component {
 }
 
 
-export default MyPage
+export default Containers
