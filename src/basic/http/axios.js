@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'query-string';
+import {store} from '@/store/index'
 
 // axios.defaults.withCredentials = true;
 // axios.withCredentials = true;
@@ -10,6 +11,10 @@ import qs from 'query-string';
 axios.interceptors.request.use(
   config => {
     config.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+    let token = store.getState('auth').auth.token;
+    if(token){
+      config.headers['Authorization'] = 'Bearer '+token;
+    }
     config.data = qs.stringify(config.data);
     return config;
   },

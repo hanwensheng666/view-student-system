@@ -42,7 +42,7 @@ class Containers extends Component {
 				<Route path="/overview" component={Overview} />
 				<Route path="/signup" component={Signup} />
 				<Route path="/competition" component={Competition} />
-        <PrivateRoute verifiy={IDENTITY.MANAGER}  path='/act-manage'  component={ActManage} />
+        <PrivateRoute verifiy={IDENTITY.TEACHER_MANAGER}  path='/act-manage'  component={ActManage} />
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={CreateSociety} />
         <Route path='/mine'  component={Mine}></Route>
 			</Switch>
