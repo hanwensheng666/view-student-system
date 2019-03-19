@@ -4,8 +4,8 @@ import './Signup.scss'
 class Signup extends Component{
   render(){
     return (
-      <div>
-        Signup
+      <div className="apply">
+        11
       </div>
     )
   }
