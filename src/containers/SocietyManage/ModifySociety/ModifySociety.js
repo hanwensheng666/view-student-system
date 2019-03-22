@@ -2,13 +2,13 @@ import {
   Form,Icon, Input, DatePicker, TimePicker, Button,Row,Col,Checkbox,Cascader ,message
 } from 'antd';
 import React, { Component } from 'react'
-import './CreateSociety.scss'
+import './ModifySociety.scss'
 import {getAllClassByGrade} from '@/api/class'
 import { getStudentByClass } from '@/api/user'
-import {createSocietyApi} from '@/api/society'
+import {editSocietyApi} from '@/api/society'
 const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 
-class CreateSociety extends Component {
+class ModifySociety extends Component {
   state = {
     options:[{
       value: '2016',
@@ -32,6 +32,19 @@ class CreateSociety extends Component {
     societyIntroduction:'',
     societyName:'',
     vicePresident:''
+  }
+  componentWillMount(){
+    let {soc} = this.props.location.state
+    this.setState({
+      _id:soc._id,
+      president:soc.president?soc.president._id:'',
+      societyFoundingTime:soc.societyFoundingTime,
+      societyIntroduction:soc.societyIntroduction,
+      societyName:soc.societyName,
+      vicePresident:soc.vicePresident?soc.vicePresident._id:'',
+      vicePresidentName:soc.vicePresident?soc.vicePresident.name:'',
+      presidentName:soc.president?soc.president.name:'',
+    })
   }
   handleSubmit = (e) => {
     e.preventDefault();
@@ -104,19 +117,20 @@ class CreateSociety extends Component {
       vicePresident:value[value.length-1]
     })
   }
-  async createSociety(){
+  async editSociety(){
     let data = {
+      _id:this.state._id,
       president:this.state.president,
       societyFoundingTime:this.state.societyFoundingTime,
       societyIntroduction:this.state.societyIntroduction,
       societyName:this.state.societyName,
       vicePresident:this.state.vicePresident
     }
-    let res = await createSocietyApi(data)
-    console.log(res)
+    let res = await editSocietyApi(data)
     if(res){
       if(res.code === 0){
-        message.success('创建社团成功！');
+        message.success('修改社团成功！');
+        this.props.history.push('/society-manage/manage-soc')
       }else{
         message.error(res.msg);
       }
@@ -125,12 +139,12 @@ class CreateSociety extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div className="society-manage">
+      <div className="society-modify">
         <Row>
           <Col span={9} offset={7}>
-            <h3 className="society-manage__title">
-              创建社团
-              <span className="society-manage__title__desc">(仅限教师操作)</span>
+            <h3 className="society-modify__title">
+              修改社团信息
+              <span className="society-modify__title__desc">(仅限教师操作)</span>
             </h3>
           </Col>
         </Row>
@@ -138,10 +152,10 @@ class CreateSociety extends Component {
           <Col span={9} offset={7}>
             <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item>
-                <Input name='societyName' onChange={this.handleChange.bind(this)} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="社团名称" />
+                <Input name='societyName' value={this.state.societyName} onChange={this.handleChange.bind(this)} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="社团名称" />
               </Form.Item>
               <Form.Item>
-                <DatePicker onChange={this.DatePick.bind(this)} placeholder="请选择社团成立时间" />
+                <DatePicker  onChange={this.DatePick.bind(this)} placeholder={this.state.societyFoundingTime || ''} />
               </Form.Item>
               <Form.Item>
                 <Cascader
@@ -149,7 +163,7 @@ class CreateSociety extends Component {
                   loadData={this.loadData}
                   onChange={this.pickPresident}
                   changeOnSelect
-                  placeholder="请选择社长人选"
+                  placeholder={this.state.presidentName}
                 />
               </Form.Item>
               <Form.Item>
@@ -158,11 +172,12 @@ class CreateSociety extends Component {
                   loadData={this.loadData}
                   onChange={this.pickVicePresident}
                   changeOnSelect
-                  placeholder="请选择副社长人选"
+                  placeholder={this.state.vicePresidentName}
                 />
               </Form.Item>
               <Form.Item>
                 <Input.TextArea 
+                  value={this.state.societyIntroduction}
                   autosize={{ minRows: 4, maxRows: 10 }}
                   name="societyIntroduction" 
                   onChange={this.handleChange.bind(this)}  
@@ -170,8 +185,8 @@ class CreateSociety extends Component {
                 />
               </Form.Item>
               <Form.Item>
-                <Button type="primary" size='large' ghost onClick={this.createSociety.bind(this)}>
-                  创建
+                <Button type="primary" size='large' ghost onClick={this.editSociety.bind(this)}>
+                  确认修改
                 </Button>
               </Form.Item>
             </Form>
@@ -182,6 +197,6 @@ class CreateSociety extends Component {
   }
 }
 
-const WrappedCreateSocietyForm = Form.create({ name: 'time_related_controls' })(CreateSociety);
+const WrappedModifySocietyForm = Form.create({ name: 'time_related_controls' })(ModifySociety);
 
-export default WrappedCreateSocietyForm;
+export default WrappedModifySocietyForm;

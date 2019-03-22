@@ -50,7 +50,7 @@ export default class Side extends Component {
               </Link>
             </Menu.Item>
             <Menu.Item key="5-2">
-              <Link to="/society-manage/modify-soc">
+              <Link to="/society-manage/manage-soc">
                 <Icon type="database" />
                 <span>管理社团</span>
               </Link>

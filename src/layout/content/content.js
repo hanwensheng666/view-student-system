@@ -29,8 +29,8 @@ const Competition = Loadable({
   loader: () => import('@/containers/Competition/Competition'),
   loading: PageHolder
 });
-const CreateSociety = Loadable({
-  loader: () => import('@/containers/SocietyManage/CreateSociety'),
+const SocietyManage = Loadable({
+  loader: () => import('@/containers/SocietyManage/index'),
   loading: PageHolder
 });
 
@@ -43,7 +43,7 @@ class Containers extends Component {
 				<Route path="/signup" component={Signup} />
 				<Route path="/competition" component={Competition} />
         <PrivateRoute verifiy={IDENTITY.TEACHER_MANAGER}  path='/act-manage'  component={ActManage} />
-        <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={CreateSociety} />
+        <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={SocietyManage} />
         <Route path='/mine'  component={Mine}></Route>
 			</Switch>
 	  </Content> 
