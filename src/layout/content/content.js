@@ -18,7 +18,7 @@ const Signup = Loadable({
   loading: PageHolder
 });
 const ActManage = Loadable({
-  loader: () => import('@/containers/ActManage/ActManage'),
+  loader: () => import('@/containers/ActManage/index'),
   loading: PageHolder
 });
 const Mine = Loadable({

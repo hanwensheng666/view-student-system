@@ -38,7 +38,7 @@ export default class Side extends Component {
             <Menu.Item key="4-2">
               <Link to="/act-manage/modify-act">
                 <Icon type="database" />
-                <span>修改活动</span>
+                <span>管理活动</span>
               </Link>
             </Menu.Item>
           </SubMenu>  
