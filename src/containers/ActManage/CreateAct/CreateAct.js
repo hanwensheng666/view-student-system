@@ -139,7 +139,7 @@ class CreateAct extends Component {
     if(res){
       if(res.code === 0){
         message.success('创建活动成功！');
-        this.props.history.push('/act-manage/manage-act')
+        this.props.history.push('/act-manage/act-list')
       }else{
         message.error(res.msg);
       }

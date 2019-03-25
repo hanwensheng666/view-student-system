@@ -1,0 +1,14 @@
+.modify-act{
+  width: 100%;
+  margin: 100px auto;
+  &__title{
+    position: relative;
+    font-size: 30px;
+    font-weight: 500;
+    &__desc{
+      text-align: left;
+      font-size: 15px;
+      padding-left: 10px;
+    }
+  }
+}
