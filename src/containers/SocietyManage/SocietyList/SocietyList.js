@@ -1,6 +1,6 @@
 
 import {
-  Table, Divider, Tag,Popconfirm, message
+  Table, Tag,Popconfirm,message
 } from 'antd';
 import React, { Component } from 'react'
 import './SocietyList.scss'
@@ -33,7 +33,7 @@ class SocietyList extends Component{
     title: '社团人数',
     dataIndex: 'member',
     key: 'member',
-    render: member => member&&'0'+'人',
+    render: member => (member&&'0')+'人',
   }, {
     title: '操作',
     key: 'action',
@@ -57,6 +57,11 @@ class SocietyList extends Component{
   }
   async removeSocietyById(id){
     let res = await removeSocietyById({id})
+    if(res && res.code === 0){
+      message.success('创建社团成功！');
+    }else{
+      message.error(res.msg);
+    }
   }
   componentWillMount(){
     this.getSocietyList()

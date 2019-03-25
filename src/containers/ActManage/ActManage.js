@@ -52,7 +52,6 @@ class ActManage extends Component{
     let stuList =  await this.getAllClassByGrade(selectedOptions[0].value)
     targetOption.loading = true;
     if(stuList){
-      console.log(stuList)
       targetOption.loading = false;
       targetOption.children = stuList.map(item=>{
         return {

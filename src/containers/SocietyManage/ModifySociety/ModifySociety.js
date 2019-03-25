@@ -1,12 +1,11 @@
 import {
-  Form,Icon, Input, DatePicker, TimePicker, Button,Row,Col,Checkbox,Cascader ,message
+  Form,Icon, Input, DatePicker, Button,Row,Col,Cascader ,message
 } from 'antd';
 import React, { Component } from 'react'
 import './ModifySociety.scss'
 import {getAllClassByGrade} from '@/api/class'
 import { getStudentByClass } from '@/api/user'
 import {editSocietyApi} from '@/api/society'
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 
 class ModifySociety extends Component {
   state = {
@@ -137,7 +136,6 @@ class ModifySociety extends Component {
     }
   }
   render() {
-    const { getFieldDecorator } = this.props.form;
     return (
       <div className="society-modify">
         <Row>

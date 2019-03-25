@@ -34,6 +34,11 @@ const SocietyManage = Loadable({
   loading: PageHolder
 });
 
+const StudentManage = Loadable({
+  loader: () => import('@/containers/StudentManage/index'),
+  loading: PageHolder
+});
+
 class Containers extends Component {
   render() {
 	return (
@@ -44,6 +49,7 @@ class Containers extends Component {
 				<Route path="/competition" component={Competition} />
         <PrivateRoute verifiy={IDENTITY.TEACHER_MANAGER}  path='/act-manage'  component={ActManage} />
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={SocietyManage} />
+        <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/student-manage'  component={StudentManage} />
         <Route path='/mine'  component={Mine}></Route>
 			</Switch>
 	  </Content> 

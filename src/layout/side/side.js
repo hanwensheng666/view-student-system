@@ -43,7 +43,7 @@ export default class Side extends Component {
             </Menu.Item>
           </SubMenu>  
           <SubMenu key='5' title={<span><Icon type="appstore" /><span>社团管理</span></span>}>
-          <Menu.Item key="5-1">
+            <Menu.Item key="5-1">
               <Link to="/society-manage/create-soc">
                 <Icon type="database" />
                 <span>创建社团</span>
@@ -56,7 +56,21 @@ export default class Side extends Component {
               </Link>
             </Menu.Item>
           </SubMenu> 
-          <Menu.Item key="6">
+          <SubMenu key='6' title={<span><Icon type="appstore" /><span>学生管理</span></span>}>
+            <Menu.Item key="6-1">
+              <Link to="/student-manage/regist-student">
+                <Icon type="database" />
+                <span>学生信息录入</span>
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="6-2">
+              <Link to="/student-manage/student-info">
+                <Icon type="database" />
+                <span>管理学生信息</span>
+              </Link>
+            </Menu.Item>
+          </SubMenu> 
+          <Menu.Item key="7">
 						<Link to="/mine">
 							<Icon type="database" />
 							<span>个人中心</span>

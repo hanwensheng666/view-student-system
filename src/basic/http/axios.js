@@ -1,6 +1,8 @@
 import axios from 'axios';
 import qs from 'query-string';
 import {store} from '@/store/index'
+import {LOGOUT} from '@/store/action-types'
+import {message} from 'antd'
 
 // axios.defaults.withCredentials = true;
 // axios.withCredentials = true;
@@ -26,7 +28,7 @@ axios.interceptors.request.use(
 // http response 拦截器
 /**
  * 统一定义 response 拦截
- * 如果返回 code 为 0，说明调用错误，统一进行错误提示
+ * 如果返回 code 为 1，说明调用错误，统一进行错误提示
  */
 axios.interceptors.response.use(
   response => {
@@ -37,7 +39,12 @@ axios.interceptors.response.use(
     return response.data;
   },
   error => {
-    if (error.response && error.response.status === 401) {
+    if (error.response.data.code===2 && error.response.status === 401) {
+      //token失效，跳转到登录页
+      message.error('登录失效，请重新登录')
+      store.dispatch({
+        type:LOGOUT
+      })
     }
     return Promise.reject(error);
   }

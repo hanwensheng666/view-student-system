@@ -1,30 +1,29 @@
 import {
-  Form,Icon, Input, DatePicker, TimePicker, Button,Row,Col,Checkbox,Cascader ,message
+  Form,Icon, Input, DatePicker, Button,Row,Col,Cascader ,message
 } from 'antd';
 import React, { Component } from 'react'
 import './CreateSociety.scss'
 import {getAllClassByGrade} from '@/api/class'
 import { getStudentByClass } from '@/api/user'
 import {createSocietyApi} from '@/api/society'
-const { MonthPicker, RangePicker, WeekPicker } = DatePicker;
 
 class CreateSociety extends Component {
   state = {
     options:[{
+      value: '2018',
+      label: '2018',
+      isLeaf: false,
+    },{
+      value: '2017',
+      label: '2017',
+      isLeaf: false,
+    },{
       value: '2016',
       label: '2016',
       isLeaf: false,
     }, {
       value: '2015',
       label: '2015',
-      isLeaf: false,
-    }, {
-      value: '2014',
-      label: '2014',
-      isLeaf: false,
-    }, {
-      value: '2013',
-      label: '2013',
       isLeaf: false,
     }],
     president:'',
@@ -124,7 +123,6 @@ class CreateSociety extends Component {
     }
   }
   render() {
-    const { getFieldDecorator } = this.props.form;
     return (
       <div className="society-manage">
         <Row>

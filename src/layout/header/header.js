@@ -6,7 +6,7 @@ import {logoutAction} from '@/store/actions/auth'
 import {withRouter} from 'react-router-dom'
 // import logo from '@/static/images/logo.png'
 // import logo2x from '@/static/images/logo@2x.png'
-import './header.css';
+import './header.scss';
 
 class Header extends Component {
   logout(){
@@ -20,8 +20,7 @@ class Header extends Component {
         <Row type="flex" justify="space-between" align="middle">
           <Col span={12} className="header_title">
             <span className="logo">
-              LOGO
-              {/* <img className="logoImg" src={logo} srcSet={`${logo2x} 2x`} alt="logo"/> */}
+              <img className="logoImg" src={require('@/static/images/logo.png')} alt="logo"/>
             </span>
             {/*<span className="logoText">太原师范学院计算机系活动管理系统</span>*/}
             <span className="logoText">活动管理系统</span>
