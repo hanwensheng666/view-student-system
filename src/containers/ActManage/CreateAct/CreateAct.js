@@ -104,7 +104,6 @@ class CreateAct extends Component {
     })
   }
   pickSociety = (value,soc) => {
-    console.log(soc)
     this.setState({
       society:value[value.length-1],
       orzOption:[]
@@ -137,7 +136,6 @@ class CreateAct extends Component {
       activityOrganizer:this.state.activityOrganizer
     }
     let res = await createActApi(data)
-    console.log(res)
     if(res){
       if(res.code === 0){
         message.success('创建活动成功！');
