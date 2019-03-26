@@ -1,20 +1,16 @@
 import {
-  Form,Icon, Input, DatePicker,TimePicker, Button,Row,Col,Cascader ,message,Radio
+  Form,Icon, Input, DatePicker,TimePicker, Button,Row,Col,Cascader ,message
 } from 'antd';
 import React, { Component } from 'react'
 import './ModifyAct.scss'
-import {getAllClassByGrade} from '@/api/class'
-import { getStudentByClass,modifyStudent } from '@/api/user'
-const RadioGroup = Radio.Group;
+import { getSocietyList } from '@/api/society'
+import {
+  createActApi,
+  editAct
+} from '@/api/activity'
 class ModifyStudent extends Component {
   state = {
     options:[],
-    sex:'1',
-    tel:'',
-    name:'',
-    userNo:'',
-    class:'',
-  
     _id:'',
     activityCredit:'',
     activityIntroduction:'',
@@ -31,6 +27,7 @@ class ModifyStudent extends Component {
       activityName:'',
       activityOrganizer:'',
       society:'',
+      activityTime:'',
       initClass:{}
     }
     if(this.props.location.state && this.props.location.state.stu){
@@ -43,9 +40,35 @@ class ModifyStudent extends Component {
       activityName:stu.activityName,
       activityOrganizer:stu.activityOrganizer,
       society:stu.society,
+      activityTime:stu.activityTime.trim().split(" ")[0],
+      activityTime1:stu.activityTime.trim().split(" ")[1],
       initClass:{}
     })
+  
+    this.getSocietyLists()
   }
+  
+  async getSocietyLists(){
+    let res = await getSocietyList();
+    if(res && res.code === 0){
+      
+      let societyList = res.results;
+      let options = societyList.map(item=>{
+        return {
+          value: item._id,
+          label: item.societyName,
+          soc:item,
+          isLeaf: true,
+        }
+      })
+      this.setState({options})
+    }
+  }
+  
+  
+  
+  
+  
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -53,14 +76,6 @@ class ModifyStudent extends Component {
         console.log('Received values of form: ', values);
       }
     });
-  }
-  async getAllClassByGrade(grade){
-    let res = await getAllClassByGrade(grade)
-    return res.results
-  }
-  async getStudentByClass(classId){
-    let res = await getStudentByClass(classId)
-    return res.results
   }
   loadData = async (selectedOptions) => {
     const targetOption = selectedOptions[selectedOptions.length - 1];
@@ -90,30 +105,56 @@ class ModifyStudent extends Component {
       class:value[value.length-1]
     })
   }
-  async modifyStudent(){
-    let data = {
-      _id:this.state._id,
-      sex:this.state.sex,
-      tel:this.state.tel,
-      name:this.state.name,
-      userNo:this.state.userNo,
-      class:this.state.class
-    }
-    let res = await modifyStudent(data)
-    if(res){
-      if(res.code === 0){
-        message.success('学生信息修改成功！');
-        this.props.history.go(-1)
-      }else{
-        message.error(res.msg);
-      }
-    }
-  }
   DatePick(date,dateString){
     this.setState({
       activityTime:dateString
     })
   }
+  TimePick(time,timeString){
+    this.setState({
+      activityTime1:timeString
+    })
+  }
+  
+  pickSociety = (value,soc) => {
+    this.setState({
+      society:value[value.length-1],
+      orzOption:[]
+    },()=>{
+      let orzOption = [
+        {
+          value:soc[0].soc.president._id,
+          label:soc[0].soc.president.name,
+        },
+        {
+          value:soc[0].soc.vicePresident._id,
+          label:soc[0].soc.vicePresident.name,
+        }
+      ]
+      this.setState({orzOption})
+    })
+  }
+  
+  async createAct(){
+    let data = {
+      activityTime:this.state.activityTime+' '+this.state.activityTime1,
+      society:this.state.society,
+      activityName:this.state.activityName,
+      activityCredit:this.state.activityCredit,
+      activityIntroduction:this.state.activityIntroduction,
+      activityOrganizer:this.state.activityOrganizer
+    }
+    let res = await editAct(data)
+    if(res){
+      if(res.code === 0){
+        message.success('修改活动成功！');
+        this.props.history.push('/act-manage/act-list')
+      }else{
+        message.error(res.msg);
+      }
+    }
+  }
+  
   
   render() {
     return (
@@ -127,55 +168,18 @@ class ModifyStudent extends Component {
         </Row>
         <Row>
           <Col span={9} offset={7}>
-           {/* <Form onSubmit={this.handleSubmit} className="login-form">
-              <Form.Item>
-                <Input name='name' value={this.state.name} onChange={this.handleChange.bind(this)} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="学生姓名" />
-              </Form.Item>
-              
-              <Form.Item>
-                <RadioGroup name='sex' onChange={this.handleChange.bind(this)} value={this.state.sex}>
-                  <Radio value={1}>男</Radio>
-                  <Radio value={0}>女</Radio>
-                </RadioGroup>
-              </Form.Item>
-              
-              <Form.Item>
-                <Input name='userNo' value={this.state.userNo} onChange={this.handleChange.bind(this)} prefix={<Icon type="solution" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="学号" />
-              </Form.Item>
-              
-              <Form.Item>
-                <Input name='tel' value={this.state.tel} onChange={this.handleChange.bind(this)} prefix={<Icon type="phone" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="联系电话" />
-              </Form.Item>
-              
-              <Form.Item>
-                <Cascader
-                  options={this.state.options}
-                  loadData={this.loadData}
-                  onChange={this.pickClass}
-                  changeOnSelect
-                  placeholder={this.state.initClass.classNo || "请选择所在班级"}
-                />
-              </Form.Item>
-              
-              <Form.Item>
-                <Button type="primary" size='large' ghost onClick={this.modifyStudent.bind(this)}>
-                  确认修改
-                </Button>
-              </Form.Item>
-              
-            </Form>*/}
             <Form onSubmit={this.handleSubmit} className="login-form">
               <Form.Item>
                 <Input name='activityName' value={this.state.activityName} onChange={this.handleChange.bind(this)} prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="活动名称" />
               </Form.Item>
               <Form.Item>
-                <DatePicker onChange={this.DatePick.bind(this)} placeholder="请选择活动开始日期" />
+                <DatePicker   onChange={this.DatePick.bind(this)} placeholder={this.state.activityTime   || "请选择活动开始日期" }/>
               </Form.Item>
               <Form.Item>
-                {/*<TimePicker onChange={this.TimePick.bind(this)} placeholder="活动时间" />*/}
+                <TimePicker onChange={this.TimePick.bind(this)} placeholder={this.state.activityTime1   || "活动时间" }/>
               </Form.Item>
               <Form.Item>
-                <Input name='activityCredit' type='number' onChange={this.handleChange.bind(this)} prefix={<Icon type="database" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="活动学分" />
+                <Input name='activityCredit' type='number'   value={this.state.activityCredit}   onChange={this.handleChange.bind(this)} prefix={<Icon type="database" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="活动学分" />
               </Form.Item>
               <Form.Item>
                 <Cascader
@@ -183,7 +187,7 @@ class ModifyStudent extends Component {
                   loadData={this.loadData}
                   onChange={this.pickSociety}
                   changeOnSelect
-                  placeholder="请选择活动组织社团"
+                  placeholder={this.state.society.societyName || "请选择活动组织社团" }
                 />
               </Form.Item>
               <Form.Item>
@@ -191,21 +195,22 @@ class ModifyStudent extends Component {
                   options={this.state.orzOption}
                   onChange={this.pickActivityOrganizer}
                   changeOnSelect
-                  placeholder="请选择活动负责人"
+                  placeholder={(this.state.activityOrganizer&&this.state.activityOrganizer.name) || "请选择活动负责人" }
                 />
               </Form.Item>
               <Form.Item>
                 <Input.TextArea
                   autosize={{ minRows: 4, maxRows: 10 }}
                   name="activityIntroduction"
+                  value={this.state.activityIntroduction}
                   onChange={this.handleChange.bind(this)}
                   placeholder="编写活动介绍"
                 />
               </Form.Item>
               <Form.Item>
-               {/* <Button type="primary" size='large' ghost onClick={this.createAct.bind(this)}>
-                  创建
-                </Button>*/}
+                <Button type="primary" size='large' ghost onClick={this.createAct.bind(this)}>
+                  修改活动
+                </Button>
               </Form.Item>
             </Form>
           </Col>
