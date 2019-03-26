@@ -155,6 +155,12 @@ class ModifyStudent extends Component {
     }
   }
   
+  pickActivityOrganizer = (value) => {
+    this.setState({
+      activityOrganizer:value[value.length-1]
+    })
+  }
+  
   
   render() {
     return (
