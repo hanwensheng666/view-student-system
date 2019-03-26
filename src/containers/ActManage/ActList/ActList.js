@@ -144,7 +144,9 @@ class StudentList extends Component{
               hideOnSinglePage:true,
               defaultPageSize:10,
               defaultCurrent:1,
-              total:25
+              current:1,
+              total:25,
+              pageSizeOptions:['10']
             }}
             columns={this.columns} 
             dataSource={actList}

@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import './ModifyAct.scss'
 import { getSocietyList } from '@/api/society'
 import {
-  createActApi,
   editAct
 } from '@/api/activity'
 class ModifyStudent extends Component {
@@ -38,8 +37,10 @@ class ModifyStudent extends Component {
       activityCredit:stu.activityCredit,
       activityIntroduction:stu.activityIntroduction,
       activityName:stu.activityName,
-      activityOrganizer:stu.activityOrganizer,
-      society:stu.society,
+      activityOrganizer:stu.activityOrganizer._id,
+      activityOrganizerName:stu.activityOrganizer.name,
+      society:stu.society._id,
+      societyName:stu.society.societyName,
       activityTime:stu.activityTime.trim().split(" ")[0],
       activityTime1:stu.activityTime.trim().split(" ")[1],
       initClass:{}
@@ -137,6 +138,7 @@ class ModifyStudent extends Component {
   
   async createAct(){
     let data = {
+      _id:this.state._id,
       activityTime:this.state.activityTime+' '+this.state.activityTime1,
       society:this.state.society,
       activityName:this.state.activityName,
@@ -193,7 +195,7 @@ class ModifyStudent extends Component {
                   loadData={this.loadData}
                   onChange={this.pickSociety}
                   changeOnSelect
-                  placeholder={this.state.society.societyName || "请选择活动组织社团" }
+                  placeholder={(this.state.societyName) || "请选择活动组织社团" }
                 />
               </Form.Item>
               <Form.Item>
@@ -201,7 +203,7 @@ class ModifyStudent extends Component {
                   options={this.state.orzOption}
                   onChange={this.pickActivityOrganizer}
                   changeOnSelect
-                  placeholder={(this.state.activityOrganizer&&this.state.activityOrganizer.name) || "请选择活动负责人" }
+                  placeholder={(this.state.activityOrganizerName) || "请选择活动负责人" }
                 />
               </Form.Item>
               <Form.Item>
