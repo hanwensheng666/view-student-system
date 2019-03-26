@@ -1,6 +1,13 @@
-.apply{
+.society-list{
   width: 100%;
-  margin: 20px auto;
-  height: 100px;
-  background-color: #93dbe9;
+  margin: 100px auto;
+  background: none !important;
+  border: none !important;
+  &__cascader{
+    margin-bottom: 15px;
+  }
+  &__table{
+    background: #fff;
+    border: #ccc 1px solid;
+  }
 }

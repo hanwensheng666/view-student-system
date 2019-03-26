@@ -38,7 +38,10 @@ const StudentManage = Loadable({
   loader: () => import('@/containers/StudentManage/index'),
   loading: PageHolder
 });
-
+const ActDetial = Loadable({
+  loader: () => import('@/containers/ActDetial/ActDetial'),
+  loading: PageHolder
+});
 class Containers extends Component {
   render() {
 	return (
@@ -47,6 +50,7 @@ class Containers extends Component {
 				<Route path="/overview" component={Overview} />
 				<Route path="/signup" component={Signup} />
 				<Route path="/competition" component={Competition} />
+				<Route path="/act-detial" component={ActDetial} />
         <PrivateRoute verifiy={IDENTITY.TEACHER_MANAGER}  path='/act-manage'  component={ActManage} />
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={SocietyManage} />
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/student-manage'  component={StudentManage} />
