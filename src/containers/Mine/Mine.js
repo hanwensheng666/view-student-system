@@ -68,6 +68,7 @@ class Mine extends Component{
     this.info()
   }
   num(id,rate){
+    
     let parameter={
       actId:id,
       rate:rate
@@ -120,6 +121,7 @@ class Mine extends Component{
   }
   
   render() {
+    let total = this.state.actList.length;
     return (
       <>
         <h2 className="h2" >|基本信息</h2>
@@ -165,7 +167,7 @@ class Mine extends Component{
               defaultPageSize:10,
               defaultCurrent:1,
               current:1,
-              total:25,
+              total:{total},
               pageSizeOptions:['10']
             }}
             columns={this.columns}
