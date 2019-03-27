@@ -41,3 +41,8 @@ export const likeActById = (actId,data) => getData(`/activity/likeActById/${actI
 //添加活动评论
 
 export const addComment = data => getData(`/activity/addComment`, data, 'POST')
+
+//参加
+export const getActByUser = (data) => getData(`/activity/getActByUser`, data, 'GET')
+
+export const rateForAct = (data) => getData(`/activity/rateForAct`, data, 'POST')

@@ -15,3 +15,6 @@ export const removeStudentById = (id,data) => getData(`/user/removeStudentById/$
 
 export const modifyStudent = data => getData(`/user/modifyStudent`,data,'POST')
 
+
+export const getUserInfo = data => getData(`/user/getUserInfo`,data,'GET')
+
