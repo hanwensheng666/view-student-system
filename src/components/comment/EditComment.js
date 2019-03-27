@@ -48,7 +48,7 @@ class EditComment extends React.Component {
         author: item.name,
         avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
         content: <p>{item.text}</p>,
-        datetime: item.date,
+        datetime: moment(item.date).format('YYYY-MM-DD hh:mm:ss'),
       }
     })
     this.setState({
@@ -63,21 +63,6 @@ class EditComment extends React.Component {
       submitting: true,
     });
     this.addComment()
-    // setTimeout(() => {
-    //   this.setState({
-    //     submitting: false,
-    //     value: '',
-    //     comments: [
-    //       {
-    //         author: 'Han Solo',
-    //         avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-    //         content: <p>{this.state.value}</p>,
-    //         datetime: moment().fromNow(),
-    //       },
-    //       ...this.state.comments,
-    //     ],
-    //   });
-    // }, 1000);
   }
   async addComment(){
     let res = await addComment({
@@ -91,6 +76,21 @@ class EditComment extends React.Component {
         value: ''
       });
       this.props.reload()
+    }
+  }
+  componentWillReceiveProps(prop){
+    if(prop.act.comments.length && (prop.act.comments.length != this.state.comments.length)){
+      let formatComments = prop.act.comments.map(item=>{
+        return {
+          author: item.name,
+          avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          content: <p>{item.text}</p>,
+          datetime: moment(item.date).format('YYYY-MM-DD hh:mm:ss'),
+        }
+      })
+      this.setState({
+        comments:[...formatComments]
+      })
     }
   }
   handleChange = (e) => {

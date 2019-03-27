@@ -8,6 +8,8 @@ import {
 } from '@/api/activity'
 
 import EditComment from '@/components/comment/EditComment'
+import PartList from '@/components/partList/PartList'
+
 const TextArea = Input.TextArea;
 
 
@@ -93,10 +95,17 @@ class ActDetial extends Component{
           </div>
         </div>
 
-        {/* 评论区 */}
-        <div className="act-detial__comment">
-          {act.comments && <EditComment reload={this.getActDetial.bind(this)} act={act}  />}
+        <div className="act-detial__interactive">
+          {/* 评论区 */}
+          <div className="act-detial__interactive__comment">
+            {act.comments && <EditComment reload={this.getActDetial.bind(this)} act={act}  />}
+          </div>
+          {/* 参与人员名单 */}
+          <div className="act-detial__interactive__part-list">
+            <PartList act={act} />
+          </div>
         </div>
+        
       </div>
     )
   }

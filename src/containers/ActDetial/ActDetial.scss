@@ -1,7 +1,8 @@
 .act-detial{
   width: 100%;
   min-width: 900px;
-  overflow: hidden;
+  height: 88vh;
+  overflow: auto;
   margin: 20px 0;
   padding: 20px;
   &__title{
@@ -111,12 +112,25 @@
     }
   }
 
-
-  &__comment{
-    background: #fff;
-    border-radius: 5px;
-    margin: 20px 0;
-    padding: 20px;
-    overflow: hidden;
+  &__interactive{
+    display: flex;
+    justify-content: space-between;
+    &__comment{
+      flex: 0 0 61.5%;
+      background: #fff;
+      border-radius: 5px;
+      margin: 10px 0;
+      padding: 20px;
+      overflow: hidden;
+    }
+    &__part-list{
+      flex: 0 0 37%;
+      background: #fff;
+      border-radius: 5px;
+      margin: 10px 0;
+      padding: 20px;
+      overflow: hidden;
+    }
   }
+  
 }
