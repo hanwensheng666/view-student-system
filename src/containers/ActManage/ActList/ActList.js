@@ -49,7 +49,6 @@ class StudentList extends Component{
     title: '操作',
     key: 'action',
     render: stu => {
-      console.log(stu,'ds')
       return (
         <>
           <Tag onClick={()=>{this.edit(stu)}} color='geekblue' key={stu._id+'1'}>编辑</Tag>
@@ -110,7 +109,6 @@ class StudentList extends Component{
         item.key = item._id;
         return item
       })
-      console.log(actList)
       this.setState({actList})
     }
   }
@@ -142,11 +140,10 @@ class StudentList extends Component{
             align='center' 
             pagination={{
               hideOnSinglePage:true,
-              defaultPageSize:10,
+              defaultPageSize:6,
               defaultCurrent:1,
-              current:1,
-              total:25,
-              pageSizeOptions:['10']
+              total:actList.length,
+              pageSizeOptions:['6']
             }}
             columns={this.columns} 
             dataSource={actList}

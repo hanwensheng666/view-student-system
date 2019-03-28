@@ -94,7 +94,7 @@ class StudentList extends Component{
   }
   
   edit(act){
-    this.props.history.push('/act-detial',{act})
+    this.props.history.push(`/act-detial/${act._id}`)
   }
   remove(stu){
     this.removeStudentById(stu._id)
@@ -146,11 +146,10 @@ class StudentList extends Component{
             align='center' 
             pagination={{
               hideOnSinglePage:true,
-              defaultPageSize:10,
+              defaultPageSize:6,
               defaultCurrent:1,
-              current:1,
-              total:25,
-              pageSizeOptions:['10']
+              total:actList.length,
+              pageSizeOptions:['6']
             }}
             columns={this.columns} 
             dataSource={actList}

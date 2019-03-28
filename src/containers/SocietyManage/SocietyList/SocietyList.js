@@ -82,6 +82,13 @@ class SocietyList extends Component{
     return (
       <div className="society-list">
         <Table 
+          pagination={{
+            hideOnSinglePage:true,
+            defaultPageSize:6,
+            defaultCurrent:1,
+            total:societyList.length,
+            pageSizeOptions:['6']
+          }}
           align='center' 
           pagination={false} 
           columns={this.columns} 

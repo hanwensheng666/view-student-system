@@ -4,28 +4,12 @@ import {
 import React, { Component } from 'react'
 import './ModifyAct.scss'
 import { getSocietyList } from '@/api/society'
+import { getSign,uploadImage,deleteResource } from '@/api/upload'
+
 import {
   editAct
 } from '@/api/activity'
-
-const props = {
-  name: 'file',
-  action: '//jsonplaceholder.typicode.com/posts/',
-  headers: {
-    authorization: 'authorization-text',
-  },
-  onChange(info) {
-    if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
-    }
-    if (info.file.status === 'done') {
-      message.success(`${info.file.name} file uploaded successfully`);
-    } else if (info.file.status === 'error') {
-      message.error(`${info.file.name} file upload failed.`);
-    }
-  },
-};
-class ModifyStudent extends Component {
+class ModifyAct extends Component {
   state = {
     options:[],
     _id:'',
@@ -34,7 +18,73 @@ class ModifyStudent extends Component {
     activityName:'',
     activityOrganizer:'',
     society:'',
-    initClass:{}
+    initClass:{},
+    uploadConfig:{
+      name: 'file',
+      listType: 'picture',
+      action: 'http://upload.qiniu.com',
+      multiple:true,
+      headers: {
+        authorization: 'authorization-text',
+      },
+      data:{
+        resource_type:'image',
+        token:'',
+        key:''
+      }
+    },
+    defaultFileList: [],
+  }
+  beforeUpload(){
+    this.getSign()
+    // console.log('获取token成功')
+  }
+  //http://pp0pcg0r3.bkt.clouddn.com/
+  onChange({ file, fileList,event }) {
+    if (file.status !== 'uploading') {
+      // console.log(file, fileList);
+    }
+    if (file.status === 'done') {
+      message.success(`${file.name} 上传成功`);
+      let url = 'http://pp0pcg0r3.bkt.clouddn.com/'+file.response.key
+      this.uploadImage(url)
+    } else if (file.status === 'error') {
+      message.error(`${file.name} 上传失败`);
+    }
+  }
+  async uploadImage(url){
+    let res = await uploadImage({actId:this.state._id,url})
+    if(res){
+      if(res.code === 0){
+        message.success(`上传成功`);
+      }else{
+        message.error(`上传失败`);
+      }
+    }
+  }
+  onRemove(file){
+    return this.deleteResource(file)
+  }
+  async deleteResource(file){
+    console.log(file)
+    let imgUrl = '';
+    if(file.url){
+      imgUrl = file.url.replace(/http:\/\/pp0pcg0r3.bkt.clouddn.com\//,'')
+      imgUrl = imgUrl.replace(/\?imageslim/,'')
+    }else if(file.response){
+      imgUrl = file.response.key
+    }else{
+      imgUrl = file.thumbUrl
+    }
+    let res = await deleteResource({
+      actId:this.state._id,
+      _id:file.uid,
+      imgUrl
+    })
+    if(res && res.code === 0){
+      return true
+    }
+    return false
   }
   componentWillMount(){
     let stu = {
@@ -50,24 +100,60 @@ class ModifyStudent extends Component {
     }
     if(this.props.location.state && this.props.location.state.stu){
       stu = this.props.location.state.stu;
+      let fileList = stu.banner.map((item,index)=>{
+        return {
+          uid: item._id,
+          name: stu.activityName+' Banner'+(index+1),
+          status: 'done',
+          url: item.imgUrl+'?imageslim',
+          thumbUrl: item.imgUrl+'?imageslim',
+        }
+      })
+      this.setState({
+        _id:stu._id,
+        activityCredit:stu.activityCredit,
+        activityIntroduction:stu.activityIntroduction,
+        activityName:stu.activityName,
+        activityOrganizer:stu.activityOrganizer._id,
+        activityOrganizerName:stu.activityOrganizer.name,
+        society:stu.society._id,
+        societyName:stu.society.societyName,
+        activityTime:stu.activityTime.trim().split(" ")[0],
+        activityTime1:stu.activityTime.trim().split(" ")[1],
+        initClass:{},
+        sign:{},
+        defaultFileList:[...fileList]
+      })
+      this.getSign()
+      this.getSocietyLists()
     }
-    this.setState({
-      _id:stu._id,
-      activityCredit:stu.activityCredit,
-      activityIntroduction:stu.activityIntroduction,
-      activityName:stu.activityName,
-      activityOrganizer:stu.activityOrganizer._id,
-      activityOrganizerName:stu.activityOrganizer.name,
-      society:stu.society._id,
-      societyName:stu.society.societyName,
-      activityTime:stu.activityTime.trim().split(" ")[0],
-      activityTime1:stu.activityTime.trim().split(" ")[1],
-      initClass:{}
-    })
-  
-    this.getSocietyLists()
+    
+    
   }
   
+  async getSign(){
+    let res = await getSign()
+    if(res){
+      // console.log(res)
+      let sign = res.results
+      this.setState({
+        uploadConfig:{
+          name: 'file',
+          listType: 'picture',
+          action: 'http://upload.qiniu.com',
+          multiple:true,
+          headers: {
+            authorization: 'authorization-text',
+          },
+          data:{
+            resource_type:'image',
+            token:sign.token,
+            key:sign.key
+          }
+        }
+      })
+    }
+  }
   async getSocietyLists(){
     let res = await getSocietyList();
     if(res && res.code === 0){
@@ -241,9 +327,15 @@ class ModifyStudent extends Component {
               </Form.Item>
               
             </Form>
-            <Upload {...props}>
+            <Upload 
+              {...this.state.uploadConfig} 
+              beforeUpload={this.beforeUpload.bind(this)}
+              defaultFileList={this.state.defaultFileList} 
+              onChange={this.onChange.bind(this)}
+              onRemove={this.onRemove.bind(this)}
+            >
               <Button>
-                <Icon type="upload" /> Click to Upload
+                <Icon type="upload" /> 上传Banner
               </Button>
             </Upload>
           </Col>
@@ -253,6 +345,6 @@ class ModifyStudent extends Component {
   }
 }
 
-const WrappedModifyStudentForm = Form.create({ name: 'time_related_controls' })(ModifyStudent);
+const WrappedModifyActForm = Form.create({ name: 'time_related_controls' })(ModifyAct);
 
-export default WrappedModifyStudentForm;
+export default WrappedModifyActForm;

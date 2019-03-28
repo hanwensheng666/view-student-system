@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Mine.scss'
 
 import { Avatar ,Table,Rate,message} from 'antd';
-
+import {Link} from 'react-router-dom'
 import {
   getActByUser,
   rateForAct
@@ -21,7 +21,10 @@ class Mine extends Component{
     title: '活动名称',
     dataIndex: 'activityName',
     key: 'activityName',
-    width:150
+    width:150,
+    render:(activityName,act)=>{
+      return <Link to={`/act-detial/${act._id}`}>{activityName}</Link>
+    }
   }, {
     title: '时间',
     dataIndex: 'activityTime',
@@ -123,10 +126,9 @@ class Mine extends Component{
   render() {
     let total = this.state.actList.length;
     return (
-      <>
-        <h2 className="h2" >|基本信息</h2>
+      <div className="mine-page">
+        <h2 className="h2" >基本信息</h2>
         <div className="mine">
-          <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
           <div className="mine__info">
             <div className="mine__info__type">
               <span className="mine__info__type__bold">姓名：</span>
@@ -158,24 +160,23 @@ class Mine extends Component{
             </div>
           </div>
         </div>
-        <h2  className="h2">|参加的活动</h2>
+        <h2  className="h2">参加的活动</h2>
         <div className="content">
           <Table
             align='center'
             pagination={{
               hideOnSinglePage:true,
-              defaultPageSize:10,
+              defaultPageSize:5,
               defaultCurrent:1,
-              current:1,
-              total:{total},
-              pageSizeOptions:['10']
+              total:this.state.actList.length,
+              pageSizeOptions:['5']
             }}
             columns={this.columns}
             dataSource={this.state.actList}
             scroll={{ y: 400 }}
           />
         </div>
-      </>
+      </div>
      
       
       

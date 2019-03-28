@@ -1,6 +1,9 @@
 .modify-act{
   width: 100%;
-  margin: 100px auto;
+  padding-top: 50px;
+  height: 88vh;
+  overflow: auto;
+  box-sizing: border-box;
   &__title{
     position: relative;
     font-size: 30px;

@@ -1,8 +1,7 @@
 .mine{
   width: 100%;
   height: 200px;
-  //background-color: #93dbe9;
-  border: 1px solid #93dbe9;
+  border: 1px solid #ccc;
   border-radius:5px;
   margin: 30px auto 50px;
   padding: 20px 50px;
@@ -17,21 +16,22 @@
       &__bold{
         font-weight: 600;
         font-size: 15px;
-        color:  #3b4368;
+        color:  #333;
       }
     }
   }
 }
-.h2{
-  color: #000000;
-  //text-align: center;
-  width: 100%;
-  background-color: #2982a3;
-}
-.content{
-  width: 100%;
-  border: 5px solid #4f7de9;
-  border-radius:5px;
-  margin: 30px auto 50px;
-  padding: 20px 50px;
+
+
+.mine-page{
+  .h2{
+    color: rgb(255, 255, 255);
+    width: 100%;
+    background-color: #16436e;
+  }
+  .content{
+    width: 100%;
+    border-radius:5px;
+    margin: 30px auto 50px;
+  } 
 }

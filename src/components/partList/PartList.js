@@ -11,7 +11,6 @@ export default class PartList extends Component{
     let data = [];
     if(this.props.act.activityParticipate && this.props.act.activityParticipate.map){
       data = this.props.act.activityParticipate.map(item=>{
-        console.log(item)
         return (
           <div style={{width:'100%',display:'flex',justifyContent:'space-between'}}>
             <div>{item.user.name}</div>

@@ -28,5 +28,5 @@ export let globals = {
 		uat: '',
 		pre: '',
 		prod: ''
-	}
+  },
 }

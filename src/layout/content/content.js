@@ -50,7 +50,7 @@ class Containers extends Component {
 				<Route path="/overview" component={Overview} />
 				<Route path="/signup" component={Signup} />
 				<Route path="/competition" component={Competition} />
-				<Route path="/act-detial" component={ActDetial} />
+				<Route path="/act-detial/:actId" component={ActDetial} />
         <PrivateRoute verifiy={IDENTITY.TEACHER_MANAGER}  path='/act-manage'  component={ActManage} />
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={SocietyManage} />
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/student-manage'  component={StudentManage} />

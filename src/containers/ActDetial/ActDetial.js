@@ -10,7 +10,6 @@ import {
 import EditComment from '@/components/comment/EditComment'
 import PartList from '@/components/partList/PartList'
 
-const TextArea = Input.TextArea;
 
 
 class ActDetial extends Component{
@@ -20,7 +19,7 @@ class ActDetial extends Component{
     banner:[]
   }
   componentDidMount(){
-    let actId = this.props.location.state.act._id;
+    let actId = this.props.match.params.actId;
     this.setState({
       actId
     },()=>{
@@ -62,15 +61,23 @@ class ActDetial extends Component{
         <div className="act-detial__act-info">
           <div className="act-detial__act-info__banner">
             <Carousel autoplay>
-              <img className="act-detial__act-info__banner__img" src="https://p1.meituan.net/750.0.0/tdchotel/__24567842__1490663.jpg" alt=""/>
-              <img className="act-detial__act-info__banner__img" src="https://p1.meituan.net/750.0.0/dnaimgdark/bbb3beeabc1654178deb654c65e997996319383.jpg" alt=""/>
+              {
+                this.state.act.banner&&this.state.act.banner.map(item=>{
+                  return <img 
+                    key={item._id}
+                    className="act-detial__act-info__banner__img"  
+                    src={item.imgUrl+'?imageslim'} 
+                    alt=""
+                  />
+                })
+              }
             </Carousel>
           </div>
           <div className="act-detial__act-info__desc">
             <div className="act-detial__act-info__desc__rate">
-              <Rate className="act-detial__act-info__desc__rate__r" defaultValue={2.5} disabled></Rate> 
+              <Rate className="act-detial__act-info__desc__rate__r" value={act.avaRate} disabled></Rate> 
               <div className="act-detial__act-info__desc__rate__score">
-                <div className="act-detial__act-info__desc__rate__score__num">2.5分</div>
+                <div className="act-detial__act-info__desc__rate__score__num">{act.avaRate}分</div>
                 <div className="act-detial__act-info__desc__rate__score__common-num">共有{act.comments?act.comments.length:'0'}条评价</div>
               </div>
             </div> 
