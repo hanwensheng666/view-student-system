@@ -1,5 +1,5 @@
 import {
-  Form,Icon, Input, DatePicker,TimePicker, Button,Row,Col,Cascader ,message
+  Form,Icon, Input, DatePicker,TimePicker, Button,Row,Col,Cascader ,message,Upload
 } from 'antd';
 import React, { Component } from 'react'
 import './ModifyAct.scss'
@@ -7,6 +7,24 @@ import { getSocietyList } from '@/api/society'
 import {
   editAct
 } from '@/api/activity'
+
+const props = {
+  name: 'file',
+  action: '//jsonplaceholder.typicode.com/posts/',
+  headers: {
+    authorization: 'authorization-text',
+  },
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
 class ModifyStudent extends Component {
   state = {
     options:[],
@@ -23,6 +41,7 @@ class ModifyStudent extends Component {
       _id:'',
       activityCredit:'',
       activityIntroduction:'',
+      
       activityName:'',
       activityOrganizer:'',
       society:'',
@@ -220,7 +239,13 @@ class ModifyStudent extends Component {
                   修改活动
                 </Button>
               </Form.Item>
+              
             </Form>
+            <Upload {...props}>
+              <Button>
+                <Icon type="upload" /> Click to Upload
+              </Button>
+            </Upload>
           </Col>
         </Row>
       </div>
