@@ -46,3 +46,5 @@ export const addComment = data => getData(`/activity/addComment`, data, 'POST')
 export const getActByUser = (data) => getData(`/activity/getActByUser`, data, 'GET')
 
 export const rateForAct = (data) => getData(`/activity/rateForAct`, data, 'POST')
+
+export const getIndexBanner = (data) => getData(`/home/getIndexBanner`, data, 'GET')
