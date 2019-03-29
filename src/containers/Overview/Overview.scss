@@ -2,8 +2,9 @@
   width: 100%;
   height: 100%;
   padding: 15px;
+  box-sizing: border-box;
   &__carousel {
-    width: 80%;
+    width: 62%;
     height: 400px;
     background-color: #5e6fa3;
     &__img {
@@ -17,5 +18,13 @@
         height: 100%;
       }
     }
+  }
+  &__echarts{
+    display: flex;
+    justify-content: space-between;
+  }
+  #socActNums{
+    width:500px;
+    height: 300px;
   }
 }
