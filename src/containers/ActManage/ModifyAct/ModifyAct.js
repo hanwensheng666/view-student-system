@@ -66,7 +66,6 @@ class ModifyAct extends Component {
     return this.deleteResource(file)
   }
   async deleteResource(file){
-    console.log(file)
     let imgUrl = '';
     if(file.url){
       imgUrl = file.url.replace(/http:\/\/pp0pcg0r3.bkt.clouddn.com\//,'')

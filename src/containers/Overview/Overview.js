@@ -31,14 +31,13 @@ class Overview extends Component{
 
   render(){
     let imgs = this.state.imgs
-  
     const swiperItem = imgs &&imgs.map((item,index) => (
       <div key={index} className="view__carousel__img">
         {
-          item.img && item.img.imgUrl ? <img src={item.img ? item.img.imgUrl : ''} alt=""/> : <img src="https://p1.meituan.net/750.0.0/tdchotel/__24567842__1490663.jpg" alt=""/>
+          (item.img && item.img.imgUrl) ? 
+          <img src={item.img.imgUrl+'?imageslim'} alt=""/> : 
+          <img src="https://p1.meituan.net/750.0.0/tdchotel/__24567842__1490663.jpg" alt=""/>
         }
-        
-        
       </div>
     ))
     return (
