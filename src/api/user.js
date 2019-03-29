@@ -10,6 +10,9 @@ export const login = data => getData('/user/login', data, 'POST')
 export const getStudentByClass = (classId,data) => getData(`/user/getStudentByClass/${classId}`, data, 'GET')
 
 
+export const getStudentSort = (classId,data) => getData(`/user/getStudentSort/${classId}`, data, 'GET')
+
+
 export const removeStudentById = (id,data) => getData(`/user/removeStudentById/${id}`,data,'POST')
 
 

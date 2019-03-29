@@ -66,7 +66,7 @@ class ActDetial extends Component{
                   return <img 
                     key={item._id}
                     className="act-detial__act-info__banner__img"  
-                    src={item.imgUrl+'?imageslim'} 
+                    src={item.imgUrl+'?imageMogr2/thumbnail/x300/format/webp'} 
                     alt=""
                   />
                 })

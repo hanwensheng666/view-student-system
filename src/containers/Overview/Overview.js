@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Carousel,Rate,Icon,Button,message,Comment, Avatar, Form, List, Input   } from 'antd';
 import './Overview.scss'
+import {Link} from 'react-router-dom'
 import {
   getIndexBanner,
 } from '@/api/activity'
@@ -13,11 +14,9 @@ import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
 
 class Overview extends Component{
-  
   state={
     imgs:''
   }
-  
   componentDidMount(){
     this.getIndexBanners()
     let socActNums = echarts.init(document.getElementById('socActNums'));
@@ -55,7 +54,7 @@ class Overview extends Component{
       <div key={index} className="view__carousel__img">
         {
           (item.img && item.img.imgUrl) ? 
-          <img src={item.img.imgUrl+'?imageslim'} alt=""/> : 
+          <Link to={`/act-detial/${item._id}`}><img style={{display:'block',width:'100%'}} src={item.img.imgUrl+'?imageMogr2/crop/700x/format/webp'} alt=""/></Link> : 
           <img src="https://p1.meituan.net/750.0.0/tdchotel/__24567842__1490663.jpg" alt=""/>
         }
       </div>
@@ -66,7 +65,7 @@ class Overview extends Component{
           <Carousel
             autoplay={true}
             infinite
-            autoplayInterval={3000}
+            autoplayInterval={300000}
           >
             {swiperItem}
           </Carousel>

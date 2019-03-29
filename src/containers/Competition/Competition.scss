@@ -1,0 +1,13 @@
+.society-list{
+  width: 100%;
+  margin: 100px auto;
+  background: none !important;
+  border: none !important;
+  &__cascader{
+    margin-bottom: 15px;
+  }
+  &__table{
+    background: #fff;
+    border: #ccc 1px solid;
+  }
+}

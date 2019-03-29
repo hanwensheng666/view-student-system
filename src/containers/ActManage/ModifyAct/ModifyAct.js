@@ -104,8 +104,8 @@ class ModifyAct extends Component {
           uid: item._id,
           name: stu.activityName+' Banner'+(index+1),
           status: 'done',
-          url: item.imgUrl+'?imageslim',
-          thumbUrl: item.imgUrl+'?imageslim',
+          url: item.imgUrl+'?imageMogr2/crop/700x/format/webp',
+          thumbUrl: item.imgUrl+'?imageMogr2/crop/700x/format/webp',
         }
       })
       this.setState({
