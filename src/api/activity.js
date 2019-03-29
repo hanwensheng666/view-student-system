@@ -48,3 +48,8 @@ export const getActByUser = (data) => getData(`/activity/getActByUser`, data, 'G
 export const rateForAct = (data) => getData(`/activity/rateForAct`, data, 'POST')
 
 export const getIndexBanner = (data) => getData(`/home/getIndexBanner`, data, 'GET')
+
+export const getActSortByRate = (data) => getData(`/home/getActSortByRate`, data, 'GET')
+
+export const getActNumGroupByClass = (data) => getData(`/home/getActNumGroupByClass`, data, 'GET')
+export const getActNumByMounth = (data) => getData(`/home/getActNumByMounth`, data, 'GET')

@@ -4,12 +4,12 @@
   padding: 15px;
   box-sizing: border-box;
   &__carousel {
-    width: 62%;
-    height: 400px;
+    width: 65%;
+    height: 350px;
     background-color: #5e6fa3;
     &__img {
       width: 100%;
-      height: 400px;
+      height: 350px;
       border-radius: 5px;
       overflow: hidden;
       &>img {
@@ -22,6 +22,10 @@
   &__echarts{
     display: flex;
     justify-content: space-between;
+    &__list{
+      width: 100%;
+      background-color: red
+    }
   }
   #socActNums{
     width:500px;
