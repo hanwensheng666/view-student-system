@@ -115,8 +115,7 @@ class Mine extends Component{
       let identity=user.identity
       let userNo=user.userNo
       let credit=user.credit
-      let classNo=user.class.classNo
-      
+      let classNo=user.class?user.class.classNo : '非学生'
       this.setState({
         name, sex,tel,identity,userNo,classNo,credit
       })

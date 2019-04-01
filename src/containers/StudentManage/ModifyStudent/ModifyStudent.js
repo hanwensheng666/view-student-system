@@ -9,10 +9,6 @@ const RadioGroup = Radio.Group;
 class ModifyStudent extends Component {
   state = {
     options:[{
-      value: '2018',
-      label: '2018',
-      isLeaf: false,
-    },{
       value: '2017',
       label: '2017',
       isLeaf: false,
@@ -23,6 +19,10 @@ class ModifyStudent extends Component {
     }, {
       value: '2015',
       label: '2015',
+      isLeaf: false,
+    },{
+      value: '2014',
+      label: '2014',
       isLeaf: false,
     }],
     sex:'1',

@@ -10,10 +10,6 @@ import {createSocietyApi} from '@/api/society'
 class CreateSociety extends Component {
   state = {
     options:[{
-      value: '2018',
-      label: '2018',
-      isLeaf: false,
-    },{
       value: '2017',
       label: '2017',
       isLeaf: false,
@@ -24,6 +20,10 @@ class CreateSociety extends Component {
     }, {
       value: '2015',
       label: '2015',
+      isLeaf: false,
+    },{
+      value: '2014',
+      label: '2014',
       isLeaf: false,
     }],
     president:'',
