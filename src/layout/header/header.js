@@ -23,7 +23,7 @@ class Header extends Component {
               <img className="logoImg" src={require('@/static/images/logo.png')} alt="logo"/>
             </span>
             {/*<span className="logoText">太原师范学院计算机系活动管理系统</span>*/}
-            <span className="logoText">活动管理系统</span>
+            <span className="logoText">太原师范学院计算机系活动管理系统</span>
           </Col>
           <Col span={4} className="login_info">
             <span>欢迎您，<span>{userInfo.name}</span></span>
