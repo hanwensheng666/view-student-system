@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Carousel,Rate,Icon,Button,message,Comment, Avatar, Form, List, Input} from 'antd';
+import { Carousel, List} from 'antd';
 import './Overview.scss'
 // 引入 ECharts 主模块
 import echarts from 'echarts/lib/echarts';
@@ -10,7 +10,7 @@ import  'echarts/lib/chart/pie';
 // 引入提示框和标题组件
 import 'echarts/lib/component/tooltip';
 import 'echarts/lib/component/title';
-
+import {Link} from 'react-router-dom'
 
 import {
   getIndexBanner,
@@ -188,7 +188,7 @@ class Overview extends Component{
               dataSource={list}
               renderItem={item => (<List.Item>
                 <div className="view__top__list__items">
-                  <div className="view__top__list__items__name">{item.activityName}</div>
+                  <div className="view__top__list__items__name"><Link to={`/act-detial/${item._id}`}>{item.activityName}</Link></div>
                   <div>{item.parts}人</div>
                   <div>{item.avaRate}分</div>
                   <div>{item.likes}</div>

@@ -2,7 +2,9 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  background: #eee;
+  background: url('http://pp0pcg0r3.bkt.clouddn.com/bd599f78-ec9b-40a8-b065-89424d1c7053.jpeg?imageMogr2/thumbnail/1920x1080/format/webp') center no-repeat;
+  background-size: cover;
+  // background: #eee;
   &__form{
     width: 500px;
     position: absolute;
@@ -11,7 +13,8 @@
     left: 50%;
     transform: translate(-50%,-50%);
     border:2px solid #fff;
-    border-radius: 5px;
+    border-radius: 10px;
+    background: rgba(255,255,255,.3);
     padding: 50px;
     box-sizing: border-box;
     &__logo{
