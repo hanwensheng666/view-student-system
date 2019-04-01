@@ -1,5 +1,6 @@
 .view {
   width: 100%;
+  min-width: 1000px;
   height: 100%;
   padding: 15px;
   box-sizing: border-box;
@@ -8,9 +9,17 @@
     justify-content: space-between;
     &__carousel {
       width: 66%;
+      min-width: 700px;
       height: 350px;
-      background-color: #5e6fa3;
+      // background-color: #5e6fa3;
       overflow: hidden;
+      .ant-carousel{
+        width: 100%;
+        height: 100%;
+        & div{
+          height: 100%;
+        }
+      }
       &__img {
         display: block;
         width: 100%;
@@ -19,15 +28,17 @@
         overflow: hidden;
         &>img {
           display: block;
-          // width:100%;
+          width:100%;
+          height: 100%;
         }
       }
     }
     &__list{
       width: 33%;
+      min-width: 400px;
       height: 350px;
       background-color: #fff;
-      border: 1px solid #eee;
+      // border: 1px solid #eee;
       border-radius: 5px;
       overflow: auto;
       &__items{
@@ -36,6 +47,8 @@
         justify-content: space-between;
         &__name{
           width: 40%;
+          white-space: nowrap;
+          text-overflow: ellipsis;
           overflow: hidden;
         }
       }
@@ -45,13 +58,17 @@
   &__echarts{
     display: flex;
     justify-content: space-between;
+    width: 100%;
+    min-width: 1000px;
   }
   #socActNums{
-    width:500px;
+    flex: 0 1 30%;
+    // min-width:450px;
     height: 500px;
   }
   #classPart{
-    width:400px;
+    flex: 1 0 60%;
+    // min-width:500px;
     height: 500px;
   }
 }

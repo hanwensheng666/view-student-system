@@ -50,7 +50,7 @@ class Overview extends Component{
         let socActNums = echarts.init(document.getElementById('classPart'));
         socActNums.setOption({
           title: { 
-            text: '各班活动参与人数',
+            text: '各班活动参与人数(最近10个活动)',
             bottom:10,
             left:'center'
           },
@@ -93,7 +93,7 @@ class Overview extends Component{
             text: '各社团活动占比',
             x:'center',
             bottom:10,
-            left:'center'
+            left:'25%'
           },
           tooltip : {
             trigger: 'item',
@@ -109,7 +109,7 @@ class Overview extends Component{
           },
           series : [
             {
-              name: '姓名',
+              name: '社团',
               type: 'pie',
               radius : '55%',
               center: ['40%', '50%'],
@@ -167,7 +167,7 @@ class Overview extends Component{
         <div className="view__top">
           <div className="view__top__carousel">
             <Carousel
-              autoplay={true}
+              autoplay={false}
               infinite
               autoplayInterval={300000}
             >
@@ -180,6 +180,7 @@ class Overview extends Component{
               header={<div>活动热度排名</div>}
               header={<div className="view__top__list__items">
                   <div className="view__top__list__items__name">活动热度排名</div>
+                  <div>参与人数</div>
                   <div>评分</div>
                   <div>赞</div>
                 </div>}
@@ -188,7 +189,8 @@ class Overview extends Component{
               renderItem={item => (<List.Item>
                 <div className="view__top__list__items">
                   <div className="view__top__list__items__name">{item.activityName}</div>
-                  <div>{item.avaRate}</div>
+                  <div>{item.parts}人</div>
+                  <div>{item.avaRate}分</div>
                   <div>{item.likes}</div>
                 </div>
               </List.Item>)}

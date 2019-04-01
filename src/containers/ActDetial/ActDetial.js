@@ -60,7 +60,7 @@ class ActDetial extends Component{
         </div>
         <div className="act-detial__act-info">
           <div className="act-detial__act-info__banner">
-            <Carousel autoplay>
+            <Carousel autoplay={false}>
               {
                 this.state.act.banner&&this.state.act.banner.map(item=>{
                   return <img 
