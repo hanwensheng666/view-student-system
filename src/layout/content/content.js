@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Layout } from 'antd';
-import { Route,Switch } from 'react-router-dom'
+import { Route,Switch,Redirect } from 'react-router-dom'
 import PrivateRoute from '@/components/common/PrivateRoute'
 import { IDENTITY } from '@/basic/config/identity'
 import Loadable from 'react-loadable';
@@ -55,6 +55,7 @@ class Containers extends Component {
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/society-manage'  component={SocietyManage} />
         <PrivateRoute verifiy={IDENTITY.TEACHER}  path='/student-manage'  component={StudentManage} />
         <Route path='/mine'  component={Mine}></Route>
+        <Redirect to="/overview" />
 			</Switch>
 	  </Content> 
 	)
