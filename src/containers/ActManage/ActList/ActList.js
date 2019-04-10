@@ -1,10 +1,9 @@
 
 import {
-  Table, Tag,Popconfirm,message,Cascader,Icon
+  Table, Tag,Popconfirm,message,Cascader
 } from 'antd';
 import React, { Component } from 'react'
 import './ActList.scss'
-import {getStudentByClass,removeStudentById} from '@/api/user'
 
 import {getSocietyList} from '@/api/society'
 import {

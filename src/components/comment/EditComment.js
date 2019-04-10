@@ -2,7 +2,7 @@ import {
   Comment, Avatar, Form, Button, List, Input,
 } from 'antd';
 import moment from 'moment';
-import React, { Component } from 'react'
+import React from 'react'
 import {addComment} from "@/api/activity"
 const TextArea = Input.TextArea;
 
@@ -79,7 +79,7 @@ class EditComment extends React.Component {
     }
   }
   componentWillReceiveProps(prop){
-    if(prop.act.comments.length && (prop.act.comments.length != this.state.comments.length)){
+    if(prop.act.comments.length && (prop.act.comments.length !== this.state.comments.length)){
       let formatComments = prop.act.comments.map(item=>{
         return {
           author: item.name,

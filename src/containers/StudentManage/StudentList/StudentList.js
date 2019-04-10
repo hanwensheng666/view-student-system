@@ -1,6 +1,6 @@
 
 import {
-  Table, Tag,Popconfirm,message,Cascader,Icon
+  Table, Tag,Popconfirm,message,Cascader
 } from 'antd';
 import React, { Component } from 'react'
 import './StudentList.scss'

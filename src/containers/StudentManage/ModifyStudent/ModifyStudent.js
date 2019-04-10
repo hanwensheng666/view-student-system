@@ -1,5 +1,5 @@
 import {
-  Form,Icon, Input, DatePicker, Button,Row,Col,Cascader ,message,Radio  
+  Form,Icon, Input, Button,Row,Col,Cascader ,message,Radio  
 } from 'antd';
 import React, { Component } from 'react'
 import './ModifyStudent.scss'

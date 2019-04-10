@@ -49,7 +49,7 @@ class Overview extends Component{
       this.setState({classNo,partNum},()=>{
         let socActNums = echarts.init(document.getElementById('classPart'));
         socActNums.setOption({
-          title: { 
+          title: {
             text: '各班活动参与人数(最近10个活动)',
             bottom:10,
             left:'center'
@@ -68,7 +68,7 @@ class Overview extends Component{
     }
 
 
-  
+
   async getIndexBanners(){
     let res = await getIndexBanner()
     if(res && res.code===0){
@@ -146,16 +146,16 @@ class Overview extends Component{
     const swiperItem = imgs &&imgs.map((item,index) => (
       <div key={index} className="view__carousel__img">
         {
-          (item.img && item.img.imgUrl) ? 
-          <img 
+          (item.img && item.img.imgUrl) ?
+          <img
             style={{
               width:'100%',
               height:'100%'
             }}
-            onClick={()=>{this.goDetial(`/act-detial/${item._id}`)}} 
-            src={item.img.imgUrl+'?imageMogr2/crop/700x/format/webp'}
+            onClick={()=>{this.goDetial(`/act-detial/${item._id}`)}}
+            src={item.img.imgUrl+'?imageMogr2/crop/700x'+(window.is_support_webp?'/format/webp':'')}
             alt=""
-          /> : 
+          /> :
           <img  src="https://p1.meituan.net/750.0.0/tdchotel/__24567842__1490663.jpg" alt=""/>
         }
       </div>
@@ -177,20 +177,19 @@ class Overview extends Component{
           <div className="view__top__list">
             <List
               size="small"
-              header={<div>活动热度排名</div>}
               header={<div className="view__top__list__items">
-                  <div className="view__top__list__items__name">活动热度排名</div>
-                  <div>参与人数</div>
-                  <div>评分</div>
-                  <div>赞</div>
-                </div>}
+                <div className="view__top__list__items__name">活动热度排名</div>
+                <div>参与人数</div>
+                <div>评分</div>
+                <div>赞</div>
+              </div>}
               bordered
               dataSource={list}
               renderItem={item => (<List.Item>
                 <div className="view__top__list__items">
                   <div className="view__top__list__items__name"><Link to={`/act-detial/${item._id}`}>{item.activityName}</Link></div>
                   <div>{item.parts}人</div>
-                  <div>{item.avaRate}分</div>
+                  <div>{Number(item.avaRate).toFixed(2)}分</div>
                   <div>{item.likes}</div>
                 </div>
               </List.Item>)}

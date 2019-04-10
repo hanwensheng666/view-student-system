@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Typography } from 'antd';
+import { List } from 'antd';
 
 
 

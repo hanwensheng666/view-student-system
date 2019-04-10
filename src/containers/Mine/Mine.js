@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Mine.scss'
 
-import { Avatar ,Table,Rate,message} from 'antd';
+import { Table,Rate,message} from 'antd';
 import {Link} from 'react-router-dom'
 import {
   getActByUser,
@@ -123,7 +123,6 @@ class Mine extends Component{
   }
   
   render() {
-    let total = this.state.actList.length;
     return (
       <div className="mine-page">
         <h2 className="h2" >基本信息</h2>

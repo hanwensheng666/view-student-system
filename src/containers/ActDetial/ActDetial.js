@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Carousel,Rate,Icon,Button,message,Comment, Avatar, Form, List, Input   } from 'antd';
+import { Carousel,Rate,Icon,Button,message   } from 'antd';
 import './ActDetial.scss'
 import {
   signIn,
@@ -66,7 +66,7 @@ class ActDetial extends Component{
                   return <img 
                     key={item._id}
                     className="act-detial__act-info__banner__img"  
-                    src={item.imgUrl+'?imageMogr2/thumbnail/x300/format/webp'} 
+                    src={item.imgUrl+'?imageMogr2/thumbnail/x300'+(window.is_support_webp?'/format/webp':'')} 
                     alt=""
                   />
                 })

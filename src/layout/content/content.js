@@ -57,7 +57,7 @@ class Containers extends Component {
         <Route path='/mine'  component={Mine}></Route>
         <Redirect to="/overview" />
 			</Switch>
-	  </Content> 
+	  </Content>
 	)
   }
 }
