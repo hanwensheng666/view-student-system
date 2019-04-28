@@ -14,7 +14,7 @@ export default class PartList extends Component{
         return (
           <div style={{width:'100%',display:'flex',justifyContent:'space-between'}}>
             <div>{item.user.name}</div>
-            <div>{item.user.class.classNo}</div>
+            <div>{item.user.class&&item.user.class.classNo}</div>
           </div>
         )
       })

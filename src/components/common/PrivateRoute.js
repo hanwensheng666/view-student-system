@@ -28,7 +28,7 @@ class PrivateRoute extends React.Component {
       c = (<Route
         {...rest}    
         render={props =>
-          isLogin ? <Error msg='您没有权限访问此页面哦！' /> : <Redirect to='/login' /> 
+          isLogin ? <div style={{marginTop:'150px'}}><Error msg='您没有权限访问此页面哦！' /></div> : <Redirect to='/login' /> 
         }
       />)
     }

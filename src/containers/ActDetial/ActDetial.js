@@ -77,7 +77,7 @@ class ActDetial extends Component{
             <div className="act-detial__act-info__desc__rate">
               <Rate className="act-detial__act-info__desc__rate__r" value={act.avaRate} disabled></Rate> 
               <div className="act-detial__act-info__desc__rate__score">
-                <div className="act-detial__act-info__desc__rate__score__num">{act.avaRate}分</div>
+                <div className="act-detial__act-info__desc__rate__score__num">{(!Number.isNaN(Number(act.avaRate)))&&Number(act.avaRate).toFixed(2)}分</div>
                 <div className="act-detial__act-info__desc__rate__score__common-num">共有{act.comments?act.comments.length:'0'}条评价</div>
               </div>
             </div> 
